@@ -1,0 +1,555 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TPAModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TPAModelStoreContainer">
+    <EntitySet Name="Constructor" EntityType="TPAModel.Store.Constructor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Method" EntityType="TPAModel.Store.Method" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MethodParameter" EntityType="TPAModel.Store.MethodParameter" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Model" EntityType="TPAModel.Store.Model" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Namespace" EntityType="TPAModel.Store.Namespace" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Property" EntityType="TPAModel.Store.Property" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Type" EntityType="TPAModel.Store.Type" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogSet" EntityType="TPAModel.Store.LogSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_dbo_Constructor_dbo_Type_TypeID" Association="TPAModel.Store.FK_dbo_Constructor_dbo_Type_TypeID">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="Constructor" EntitySet="Constructor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Method_dbo_Type_ReturnTypeID" Association="TPAModel.Store.FK_dbo_Method_dbo_Type_ReturnTypeID">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="Method" EntitySet="Method" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Method_dbo_Type_TypeID" Association="TPAModel.Store.FK_dbo_Method_dbo_Type_TypeID">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="Method" EntitySet="Method" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_MethodParameter_dbo_Method_MethodID" Association="TPAModel.Store.FK_dbo_MethodParameter_dbo_Method_MethodID">
+      <End Role="Method" EntitySet="Method" />
+      <End Role="MethodParameter" EntitySet="MethodParameter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_MethodParameter_dbo_Type_TypeID" Association="TPAModel.Store.FK_dbo_MethodParameter_dbo_Type_TypeID">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="MethodParameter" EntitySet="MethodParameter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Namespace_dbo_Model_ModelID" Association="TPAModel.Store.FK_dbo_Namespace_dbo_Model_ModelID">
+      <End Role="Model" EntitySet="Model" />
+      <End Role="Namespace" EntitySet="Namespace" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Type_dbo_Namespace_NamespaceID" Association="TPAModel.Store.FK_dbo_Type_dbo_Namespace_NamespaceID">
+      <End Role="Namespace" EntitySet="Namespace" />
+      <End Role="Type" EntitySet="Type" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Property_dbo_Type_TypeID" Association="TPAModel.Store.FK_dbo_Property_dbo_Type_TypeID">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="Property" EntitySet="Property" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Constructor">
+    <Key>
+      <PropertyRef Name="ConstructorID" />
+    </Key>
+    <Property Name="ConstructorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="TypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Method">
+    <Key>
+      <PropertyRef Name="MethodID" />
+    </Key>
+    <Property Name="MethodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="TypeID" Type="int" Nullable="false" />
+    <Property Name="ReturnTypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MethodParameter">
+    <Key>
+      <PropertyRef Name="MethodParameterID" />
+    </Key>
+    <Property Name="MethodParameterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MethodID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="TypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Model">
+    <Key>
+      <PropertyRef Name="ModelID" />
+    </Key>
+    <Property Name="ModelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Namespace">
+    <Key>
+      <PropertyRef Name="NamespaceID" />
+    </Key>
+    <Property Name="NamespaceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="ModelID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Property">
+    <Key>
+      <PropertyRef Name="PropertyID" />
+    </Key>
+    <Property Name="PropertyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="TypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="NamespaceID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_Constructor_dbo_Type_TypeID">
+    <End Role="Type" Type="TPAModel.Store.Type" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Constructor" Type="TPAModel.Store.Constructor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="Constructor">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Method_dbo_Type_ReturnTypeID">
+    <End Role="Type" Type="TPAModel.Store.Type" Multiplicity="1" />
+    <End Role="Method" Type="TPAModel.Store.Method" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="Method">
+        <PropertyRef Name="ReturnTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Method_dbo_Type_TypeID">
+    <End Role="Type" Type="TPAModel.Store.Type" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Method" Type="TPAModel.Store.Method" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="Method">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_MethodParameter_dbo_Method_MethodID">
+    <End Role="Method" Type="TPAModel.Store.Method" Multiplicity="1" />
+    <End Role="MethodParameter" Type="TPAModel.Store.MethodParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Method">
+        <PropertyRef Name="MethodID" />
+      </Principal>
+      <Dependent Role="MethodParameter">
+        <PropertyRef Name="MethodID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_MethodParameter_dbo_Type_TypeID">
+    <End Role="Type" Type="TPAModel.Store.Type" Multiplicity="1" />
+    <End Role="MethodParameter" Type="TPAModel.Store.MethodParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="MethodParameter">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Namespace_dbo_Model_ModelID">
+    <End Role="Model" Type="TPAModel.Store.Model" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Namespace" Type="TPAModel.Store.Namespace" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="ModelID" />
+      </Principal>
+      <Dependent Role="Namespace">
+        <PropertyRef Name="ModelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Type_dbo_Namespace_NamespaceID">
+    <End Role="Namespace" Type="TPAModel.Store.Namespace" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Type" Type="TPAModel.Store.Type" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Namespace">
+        <PropertyRef Name="NamespaceID" />
+      </Principal>
+      <Dependent Role="Type">
+        <PropertyRef Name="NamespaceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Property_dbo_Type_TypeID">
+    <End Role="Type" Type="TPAModel.Store.Type" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Property" Type="TPAModel.Store.Property" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="Property">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TPAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Constructor">
+          <Key>
+            <PropertyRef Name="ConstructorID" />
+          </Key>
+          <Property Name="ConstructorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_dbo_Constructor_dbo_Type_TypeID" FromRole="Constructor" ToRole="Type" />
+        </EntityType>
+        <EntityType Name="Method">
+          <Key>
+            <PropertyRef Name="MethodID" />
+          </Key>
+          <Property Name="MethodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="ReturnTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_dbo_Method_dbo_Type_ReturnTypeID" FromRole="Method" ToRole="Type" />
+          <NavigationProperty Name="Type1" Relationship="Self.FK_dbo_Method_dbo_Type_TypeID" FromRole="Method" ToRole="Type" />
+          <NavigationProperty Name="MethodParameter" Relationship="Self.FK_dbo_MethodParameter_dbo_Method_MethodID" FromRole="Method" ToRole="MethodParameter" />
+        </EntityType>
+        <EntityType Name="MethodParameter">
+          <Key>
+            <PropertyRef Name="MethodParameterID" />
+          </Key>
+          <Property Name="MethodParameterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MethodID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Method" Relationship="Self.FK_dbo_MethodParameter_dbo_Method_MethodID" FromRole="MethodParameter" ToRole="Method" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_dbo_MethodParameter_dbo_Type_TypeID" FromRole="MethodParameter" ToRole="Type" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="ModelID" />
+          </Key>
+          <Property Name="ModelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Namespace" Relationship="Self.FK_dbo_Namespace_dbo_Model_ModelID" FromRole="Model" ToRole="Namespace" />
+        </EntityType>
+        <EntityType Name="Namespace">
+          <Key>
+            <PropertyRef Name="NamespaceID" />
+          </Key>
+          <Property Name="NamespaceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ModelID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Model" Relationship="Self.FK_dbo_Namespace_dbo_Model_ModelID" FromRole="Namespace" ToRole="Model" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_dbo_Type_dbo_Namespace_NamespaceID" FromRole="Namespace" ToRole="Type" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="PropertyID" />
+          </Key>
+          <Property Name="PropertyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_dbo_Property_dbo_Type_TypeID" FromRole="Property" ToRole="Type" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NamespaceID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Constructor" Relationship="Self.FK_dbo_Constructor_dbo_Type_TypeID" FromRole="Type" ToRole="Constructor" />
+          <NavigationProperty Name="Method" Relationship="Self.FK_dbo_Method_dbo_Type_ReturnTypeID" FromRole="Type" ToRole="Method" />
+          <NavigationProperty Name="Method1" Relationship="Self.FK_dbo_Method_dbo_Type_TypeID" FromRole="Type" ToRole="Method" />
+          <NavigationProperty Name="MethodParameter" Relationship="Self.FK_dbo_MethodParameter_dbo_Type_TypeID" FromRole="Type" ToRole="MethodParameter" />
+          <NavigationProperty Name="Namespace" Relationship="Self.FK_dbo_Type_dbo_Namespace_NamespaceID" FromRole="Type" ToRole="Namespace" />
+          <NavigationProperty Name="Property" Relationship="Self.FK_dbo_Property_dbo_Type_TypeID" FromRole="Type" ToRole="Property" />
+        </EntityType>
+        <Association Name="FK_dbo_Constructor_dbo_Type_TypeID">
+          <End Role="Type" Type="Self.Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Constructor" Type="Self.Constructor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Constructor">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Method_dbo_Type_ReturnTypeID">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Method" Type="Self.Method" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Method">
+              <PropertyRef Name="ReturnTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Method_dbo_Type_TypeID">
+          <End Role="Type" Type="Self.Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Method" Type="Self.Method" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Method">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MethodParameter_dbo_Method_MethodID">
+          <End Role="Method" Type="Self.Method" Multiplicity="1" />
+          <End Role="MethodParameter" Type="Self.MethodParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Method">
+              <PropertyRef Name="MethodID" />
+            </Principal>
+            <Dependent Role="MethodParameter">
+              <PropertyRef Name="MethodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MethodParameter_dbo_Type_TypeID">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="MethodParameter" Type="Self.MethodParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="MethodParameter">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Namespace_dbo_Model_ModelID">
+          <End Role="Model" Type="Self.Model" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Namespace" Type="Self.Namespace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="ModelID" />
+            </Principal>
+            <Dependent Role="Namespace">
+              <PropertyRef Name="ModelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Type_dbo_Namespace_NamespaceID">
+          <End Role="Namespace" Type="Self.Namespace" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Type" Type="Self.Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Namespace">
+              <PropertyRef Name="NamespaceID" />
+            </Principal>
+            <Dependent Role="Type">
+              <PropertyRef Name="NamespaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Property_dbo_Type_TypeID">
+          <End Role="Type" Type="Self.Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Property" Type="Self.Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TPAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Constructor" EntityType="Self.Constructor" />
+          <EntitySet Name="Method" EntityType="Self.Method" />
+          <EntitySet Name="MethodParameter" EntityType="Self.MethodParameter" />
+          <EntitySet Name="Model" EntityType="Self.Model" />
+          <EntitySet Name="Namespace" EntityType="Self.Namespace" />
+          <EntitySet Name="Property" EntityType="Self.Property" />
+          <EntitySet Name="Type" EntityType="Self.Type" />
+          <AssociationSet Name="FK_dbo_Constructor_dbo_Type_TypeID" Association="Self.FK_dbo_Constructor_dbo_Type_TypeID">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Constructor" EntitySet="Constructor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Method_dbo_Type_ReturnTypeID" Association="Self.FK_dbo_Method_dbo_Type_ReturnTypeID">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Method" EntitySet="Method" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Method_dbo_Type_TypeID" Association="Self.FK_dbo_Method_dbo_Type_TypeID">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Method" EntitySet="Method" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MethodParameter_dbo_Method_MethodID" Association="Self.FK_dbo_MethodParameter_dbo_Method_MethodID">
+            <End Role="Method" EntitySet="Method" />
+            <End Role="MethodParameter" EntitySet="MethodParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MethodParameter_dbo_Type_TypeID" Association="Self.FK_dbo_MethodParameter_dbo_Type_TypeID">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="MethodParameter" EntitySet="MethodParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Namespace_dbo_Model_ModelID" Association="Self.FK_dbo_Namespace_dbo_Model_ModelID">
+            <End Role="Model" EntitySet="Model" />
+            <End Role="Namespace" EntitySet="Namespace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Type_dbo_Namespace_NamespaceID" Association="Self.FK_dbo_Type_dbo_Namespace_NamespaceID">
+            <End Role="Namespace" EntitySet="Namespace" />
+            <End Role="Type" EntitySet="Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Property_dbo_Type_TypeID" Association="Self.FK_dbo_Property_dbo_Type_TypeID">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Property" EntitySet="Property" />
+          </AssociationSet>
+          <EntitySet Name="LogSet" EntityType="TPAModel.Log" />
+        </EntityContainer>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Message" Type="String" Nullable="false" />
+          <Property Name="Date" Type="String" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TPAModelStoreContainer" CdmEntityContainer="TPAEntities">
+    <EntitySetMapping Name="Constructor">
+      <EntityTypeMapping TypeName="IsTypeOf(TPAModel.Constructor)">
+        <MappingFragment StoreEntitySet="Constructor">
+          <ScalarProperty Name="ConstructorID" ColumnName="ConstructorID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Method">
+      <EntityTypeMapping TypeName="IsTypeOf(TPAModel.Method)">
+        <MappingFragment StoreEntitySet="Method">
+          <ScalarProperty Name="MethodID" ColumnName="MethodID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="ReturnTypeID" ColumnName="ReturnTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MethodParameter">
+      <EntityTypeMapping TypeName="IsTypeOf(TPAModel.MethodParameter)">
+        <MappingFragment StoreEntitySet="MethodParameter">
+          <ScalarProperty Name="MethodParameterID" ColumnName="MethodParameterID" />
+          <ScalarProperty Name="MethodID" ColumnName="MethodID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Model">
+      <EntityTypeMapping TypeName="IsTypeOf(TPAModel.Model)">
+        <MappingFragment StoreEntitySet="Model">
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Namespace">
+      <EntityTypeMapping TypeName="IsTypeOf(TPAModel.Namespace)">
+        <MappingFragment StoreEntitySet="Namespace">
+          <ScalarProperty Name="NamespaceID" ColumnName="NamespaceID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Property">
+      <EntityTypeMapping TypeName="IsTypeOf(TPAModel.Property)">
+        <MappingFragment StoreEntitySet="Property">
+          <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Type">
+      <EntityTypeMapping TypeName="IsTypeOf(TPAModel.Type)">
+        <MappingFragment StoreEntitySet="Type">
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NamespaceID" ColumnName="NamespaceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TPAModel.Log)">
+        <MappingFragment StoreEntitySet="LogSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
